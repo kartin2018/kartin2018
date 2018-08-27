@@ -1,3 +1,4 @@
+<%@page import="entity.Cart"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
@@ -37,6 +38,12 @@
 
 				</script> -->
 			<div class="in-check" >
+				 <%
+			Cart cart = (Cart) session.getAttribute("Cart");
+			if (cart != null) {
+			
+			%>  
+			
 			<c:set var="total" value="${0}"/>
 			<c:forEach items="${ Cart.productsCart }" var="c">
 				<ul class="unit">
@@ -49,7 +56,7 @@
 				</ul>
 				<ul class="cart-header">
 					<div class="close1"><form action="remproduct.do"><button type="submit" name="productId" value="${ c.productId }"></button></form> </div>
-						<li class="ring-in"><a><img src="${ c.productBrand }" class="img-responsive" alt=""></a>
+						<li class="ring-in"><a><img src="${ c.productImage1 }" class="img-responsive" alt=""></a>
 						</li>
 						<li><span class="name">${ c.productName }</span></li>
 						<li><span class="cost"> &#x20b9; ${ c.productPrice }</span></li>
@@ -61,14 +68,21 @@
 				
 				
 				</c:forEach>
-				 ${total}
+				<span class="cost">Total Amount: ${total}</span>
 			</div>
-			</div>  
-			
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>hjhjsvvssvhj
+			</div>
+		
 			<form action="payment.jsp">
-			<button type="submit"></button>	
+			<button type="submit">Payment</button>	
 			</form>
+			
+						<%
+		} else {
+	%>		
+			<span><h2>Your Cart is Empty</h2></span>
+					<%
+		}
+	%> 	
 		 </div>
 		</div>
 	</div>
